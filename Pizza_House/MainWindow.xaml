@@ -1,0 +1,30 @@
+﻿<Window x:Name="Main_Window" x:Class="Pizza_House.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Pizza_House"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+    <Grid Background="#FF3D3D3D">
+        <Canvas x:Name="Body" HorizontalAlignment="Left" Height="420" VerticalAlignment="Top" Width="794" Margin="0,0,-0.4,0">
+            <Canvas x:Name="Home_Panel" HorizontalAlignment="Left" Height="411" VerticalAlignment="Top" Width="782" Canvas.Left="10" Canvas.Top="10" d:IsHidden="True">
+                <Image x:Name="Menu_Img" Height="206" Canvas.Left="153" Canvas.Top="99" Width="206" Source="menu.png" MouseLeftButtonUp="Change_Panel" Tag="Menu"/>
+                <Image x:Name="Discount_Img" Height="206" Canvas.Left="421" Canvas.Top="99" Width="206" Source="price-tag.png"/>
+            </Canvas>
+            <Canvas x:Name="Menu_Panel" HorizontalAlignment="Left" Height="411" VerticalAlignment="Top" Width="782" Canvas.Left="10" Canvas.Top="10">
+                <Image x:Name="Back_Menu_img" Height="49" Width="49" Source="undo.png" Tag="Home" MouseLeftButtonUp="Change_Panel"/>
+                <Grid Height="401" Canvas.Left="68" Canvas.Top="10" Width="714"/>
+            </Canvas>
+            <Canvas x:Name="Details_Panel" HorizontalAlignment="Left" Height="421" VerticalAlignment="Top" Width="792" d:IsHidden="True">
+                <Image x:Name="Desc_Img" Height="206" Canvas.Left="88" Canvas.Top="67" Width="206"/>
+                <Label x:Name="Desc_Price_txt" Content="" Canvas.Left="118" Canvas.Top="284" Width="148" Height="36" FontSize="20"/>
+                <Button x:Name="Add_Btn" Content="Add to cart" Canvas.Left="142" Canvas.Top="325" Width="100" FontSize="16" Background="{x:Null}" Foreground="#FFFF6F00" BorderBrush="#FFFF6F00" FontWeight="Bold" RenderTransformOrigin="0.5,0.5" BorderThickness="1" Click="Add_Btn_Click"/>
+                <Image x:Name="Back_Detail_img" Height="49" Canvas.Left="10" Canvas.Top="10" Width="49" Source="undo.png" Tag="Menu" MouseLeftButtonUp="Change_Panel"/>
+                <ListBox x:Name="Ingredient_List" Height="283" Canvas.Left="421" Canvas.Top="85" Width="281" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#FFF96D01"/>
+                <Label Content="Ingredients" Canvas.Left="421" Canvas.Top="45" Width="235" Height="32" Foreground="#FFF96D01" FontWeight="Bold" FontSize="16"/>
+            </Canvas>
+        </Canvas>
+
+    </Grid>
+</Window>
