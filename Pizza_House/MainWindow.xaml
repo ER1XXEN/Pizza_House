@@ -12,17 +12,36 @@
                 <Image x:Name="Menu_Img" Height="206" Canvas.Left="153" Canvas.Top="99" Width="206" Source="menu.png" MouseLeftButtonUp="Change_Panel" Tag="Menu"/>
                 <Image x:Name="Discount_Img" Height="206" Canvas.Left="421" Canvas.Top="99" Width="206" Source="price-tag.png"/>
             </Canvas>
-            <Canvas x:Name="Menu_Panel" HorizontalAlignment="Left" Height="411" VerticalAlignment="Top" Width="782" Canvas.Left="10" Canvas.Top="10">
+            <Canvas x:Name="Menu_Panel" HorizontalAlignment="Left" Height="411" VerticalAlignment="Top" Width="782" Canvas.Left="10" Canvas.Top="10" d:IsHidden="True">
                 <Image x:Name="Back_Menu_img" Height="49" Width="49" Source="undo.png" Tag="Home" MouseLeftButtonUp="Change_Panel"/>
-                <Grid Height="401" Canvas.Left="68" Canvas.Top="10" Width="714"/>
+                <ListBox x:Name="Menu_listbox" Height="391" Canvas.Left="79" Width="598" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#FFF96D01" SelectionChanged="Menu_listbox_SelectionChanged" ScrollViewer.VerticalScrollBarVisibility="Hidden" ScrollViewer.HorizontalScrollBarVisibility="Disabled" Canvas.Top="10">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="50"></ColumnDefinition>
+                                    <ColumnDefinition Width="70"></ColumnDefinition>
+                                    <ColumnDefinition Width="300"></ColumnDefinition>
+                                    <ColumnDefinition Width="50"></ColumnDefinition>
+                                </Grid.ColumnDefinitions>
+                                <TextBlock Grid.Column="0" Text="{Binding ID}" VerticalAlignment="Center" Margin="5"></TextBlock>
+                                <TextBlock Grid.Column="1" Text="{Binding Name}" VerticalAlignment="Center" Margin="5"></TextBlock>
+                                <TextBlock Grid.Column="2" Text="{Binding Topping}" VerticalAlignment="Center" Margin="5"></TextBlock>
+                                <TextBlock Grid.Column="3" Text="{Binding Price}" VerticalAlignment="Center" Margin="5"></TextBlock>
+                            </Grid>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
             </Canvas>
-            <Canvas x:Name="Details_Panel" HorizontalAlignment="Left" Height="421" VerticalAlignment="Top" Width="792" d:IsHidden="True">
-                <Image x:Name="Desc_Img" Height="206" Canvas.Left="88" Canvas.Top="67" Width="206"/>
-                <Label x:Name="Desc_Price_txt" Content="" Canvas.Left="118" Canvas.Top="284" Width="148" Height="36" FontSize="20"/>
-                <Button x:Name="Add_Btn" Content="Add to cart" Canvas.Left="142" Canvas.Top="325" Width="100" FontSize="16" Background="{x:Null}" Foreground="#FFFF6F00" BorderBrush="#FFFF6F00" FontWeight="Bold" RenderTransformOrigin="0.5,0.5" BorderThickness="1" Click="Add_Btn_Click"/>
+            <Canvas x:Name="Details_Panel" HorizontalAlignment="Left" Height="421" VerticalAlignment="Top" Width="792">
+                <Image x:Name="Desc_Img" Height="206" Canvas.Left="88" Canvas.Top="85" Width="206"/>
+                <Label x:Name="Desc_Price_lbl" Content="" Canvas.Left="118" Canvas.Top="332" Width="148" Height="36" FontSize="20" Foreground="#FFF96D01"/>
+                <Button x:Name="Add_Btn" Content="Add to cart" Canvas.Left="142" Canvas.Top="372" Width="100" FontSize="16" Background="{x:Null}" Foreground="#FFFF6F00" BorderBrush="#FFFF6F00" FontWeight="Bold" RenderTransformOrigin="0.5,0.5" BorderThickness="1" Click="Add_Btn_Click"/>
                 <Image x:Name="Back_Detail_img" Height="49" Canvas.Left="10" Canvas.Top="10" Width="49" Source="undo.png" Tag="Menu" MouseLeftButtonUp="Change_Panel"/>
-                <ListBox x:Name="Ingredient_List" Height="283" Canvas.Left="421" Canvas.Top="85" Width="281" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#FFF96D01"/>
+                <ListBox x:Name="Ingredient_List" Height="283" Canvas.Left="421" Canvas.Top="85" Width="281" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#FFF96D01" SelectionChanged="Ingredient_List_SelectionChanged"/>
                 <Label Content="Ingredients" Canvas.Left="421" Canvas.Top="45" Width="235" Height="32" Foreground="#FFF96D01" FontWeight="Bold" FontSize="16"/>
+                <Label x:Name="Details_Name_lbl" Content="" Canvas.Left="88" Canvas.Top="45" Width="206" Height="32" Foreground="#FFF96D01" FontWeight="Bold" FontSize="16"/>
+                <ComboBox x:Name="Sizes_combo" Canvas.Left="88" Canvas.Top="305" Width="206" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#FFF96D0F" SelectionChanged="Sizes_combo_SelectionChanged"/>
             </Canvas>
         </Canvas>
 

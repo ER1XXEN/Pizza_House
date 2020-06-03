@@ -36,6 +36,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
@@ -69,6 +70,11 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Model\Ingredient.cs" />
+    <Compile Include="Model\Pizza.cs" />
+    <Compile Include="Model\Pizza_Ingredients.cs" />
+    <Compile Include="Model\Pizza_Sizes.cs" />
+    <Compile Include="Model\Size.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -105,6 +111,15 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="price-tag.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Infomation\Pizza.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Infomation\Ingredients.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Infomation\Pizza_Ingredients.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
