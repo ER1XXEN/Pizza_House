@@ -70,8 +70,9 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Model\Cart_Item.cs" />
     <Compile Include="Model\Ingredient.cs" />
-    <Compile Include="Model\Pizza.cs" />
+    <Compile Include="Model\Menu_Item.cs" />
     <Compile Include="Model\Pizza_Ingredients.cs" />
     <Compile Include="Model\Pizza_Sizes.cs" />
     <Compile Include="Model\Size.cs" />
@@ -104,22 +105,36 @@
     <Resource Include="Assets\undo-1.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="undo.png" />
+    <Resource Include="Assets\menu.png" />
+    <Resource Include="Assets\discount.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Assets\Hover_menu.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Assets\custom.png" />
+    <Resource Include="Assets\Hover_discount.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Assets\Hover_custom.png" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="menu.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="price-tag.png" />
+    <Resource Include="custom.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Infomation\Pizza.txt" />
+    <Resource Include="discount.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Infomation\Ingredients.txt" />
+    <Resource Include="undo-1.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Infomation\Pizza_Ingredients.txt" />
+    <Resource Include="logo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Infomation\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

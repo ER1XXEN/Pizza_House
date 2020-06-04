@@ -8,15 +8,15 @@ namespace Pizza_House.Model
 {
     class Pizza_Sizes
     {
-        public virtual Pizza Pizza { get; set; }
-        public int PizzaID { get; set; }
+        public virtual Menu_Items Menu_Items { get; set; }
+        public int Menu_ItemID { get; set; }
         public virtual Size Size { get; set; }
         public int SizeID { get; set; }
 
-        public Pizza_Sizes(Pizza pizza, Size size)
+        public Pizza_Sizes(Menu_Items Menu_Items, Size size)
         {
-            Pizza = pizza;
-            PizzaID = pizza.ID;
+            this.Menu_Items = Menu_Items;
+            Menu_ItemID = Convert.ToInt32(Menu_Items.ID);
             Size = size;
             SizeID = size.ID;
         }
