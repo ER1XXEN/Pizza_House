@@ -25,12 +25,12 @@ namespace Pizza_House
         #region Variable
         int Menu_Id = -1;
         Random rnd = new Random();
-        List<Menu_Items> Pizzas = new List<Menu_Items>();
-        List<Pizza_Ingredients> Pizza_Ingredients = new List<Pizza_Ingredients>();
-        List<Pizza_Sizes> Pizza_Sizes = new List<Pizza_Sizes>();
+        List<Menu_Items> Menu_Items = new List<Menu_Items>();
+        List<Menu_Item_Ingredients> Pizza_Ingredients = new List<Menu_Item_Ingredients>();
+        List<Menu_Item_Sizes> Menu_Item_Sizes = new List<Menu_Item_Sizes>();
         List<Ingredient> Ingredients = new List<Ingredient>();
         List<Model.Size> Sizes = new List<Model.Size>();
-        List<int> Cart_Items = new List<int>();
+        List<Cart_Item> Cart_Content = new List<Cart_Item>();
         #endregion
 
         public MainWindow()
@@ -41,7 +41,7 @@ namespace Pizza_House
 
         public void SetUp()
         {
-            Change_Panel("Amount");
+            Change_Panel("Menu");
             GenerateMenu();
             PrepareCustom();
         }
@@ -58,7 +58,7 @@ namespace Pizza_House
 
         private void GenerateMenu()
         {
-            int amount = 20;
+            int amount = 10;
             #region Ingredients
             for (int i = 0; i < amount; i++)
             {
@@ -80,10 +80,11 @@ namespace Pizza_House
             #region Pizzas
             for (int i = 1; i < amount; i++)
             {
-                Menu_Items _Pizza = new Menu_Items(i, "Pizza " + i);
+                Menu_Items _Pizza = new Menu_Items(Menu_Items.Count+1, "Pizza " + i);
+                _Pizza.Type = Menu_Item_Type.Pizza;
                 for (int x = 0; x < rnd.Next(4, 6); x++)
                 {
-                    Pizza_Ingredients _Ingredients = new Pizza_Ingredients(i, rnd.Next(0, Ingredients.Count));
+                    Menu_Item_Ingredients _Ingredients = new Menu_Item_Ingredients(i, rnd.Next(0, Ingredients.Count));
                     _Ingredients.Menu_Item = _Pizza;
                     _Ingredients.Ingredient = Ingredients[_Ingredients.IngredientID];
                     if (Pizza_Ingredients.Where(y => y.Menu_Item == _Pizza && y.Ingredient.Type == Ingredient_Type.Dough).Count() == 1 && _Ingredients.Ingredient.Type == Ingredient_Type.Dough)
@@ -91,19 +92,32 @@ namespace Pizza_House
                     else
                         Pizza_Ingredients.Add(_Ingredients);
                 }
-                Pizza_Sizes.Add(new Model.Pizza_Sizes(_Pizza, Sizes.Where(x => x.Type == Size_Type.Pizza).ToList()[0]));
-                while (Pizza_Sizes.Count(x => x.Menu_ItemID.ToString() == _Pizza.ID) < 3)
+                Menu_Item_Sizes.Add(new Model.Menu_Item_Sizes(_Pizza, Sizes.Where(x => x.Type == Size_Type.Pizza).ToList()[0]));
+                while (Menu_Item_Sizes.Count(x => x.Menu_ItemID.ToString() == _Pizza.ID) < 3)
                 {
-                    Pizza_Sizes _Size = new Pizza_Sizes(_Pizza, Sizes.Where(x => x.Type == Size_Type.Pizza).ToList()[rnd.Next(1, Sizes.Where(x => x.Type == Size_Type.Pizza).ToList().Count)]);
-                    if (!Pizza_Sizes.Any(x => x.SizeID == _Size.SizeID && x.Menu_ItemID.ToString() == _Pizza.ID))
-                        Pizza_Sizes.Add(_Size);
+                    Menu_Item_Sizes _Size = new Menu_Item_Sizes(_Pizza, Sizes.Where(x => x.Type == Size_Type.Pizza).ToList()[rnd.Next(1, Sizes.Where(x => x.Type == Size_Type.Pizza).ToList().Count)]);
+                    if (!Menu_Item_Sizes.Any(x => x.SizeID == _Size.SizeID && x.Menu_ItemID.ToString() == _Pizza.ID))
+                        Menu_Item_Sizes.Add(_Size);
                 }
                 _Pizza.Ingredients = Pizza_Ingredients.Where(x => x.Menu_ItemID == i).ToList();
-                _Pizza.Sizes = Pizza_Sizes.Where(x => x.Menu_ItemID == i).Distinct().ToList();
-                Pizzas.Add(_Pizza);
+                _Pizza.Sizes = Menu_Item_Sizes.Where(x => x.Menu_ItemID == i).Distinct().ToList();
+                Menu_Items.Add(_Pizza);
             }
-            Menu_listbox.ItemsSource = Pizzas;
             #endregion
+            #region Drinks
+            for (int i = 1; i < amount; i++)
+            {
+                Menu_Items _Drink = new Menu_Items(Menu_Items.Count + 1, "Drink " + i, Menu_Item_Type.Drink);
+                foreach (Model.Size Size in Sizes.Where(x => x.Type == Size_Type.Drink).ToList())
+                {
+                    Menu_Item_Sizes.Add(new Model.Menu_Item_Sizes(_Drink, Size));
+                }
+                _Drink.Price = string.Format("{0}", rnd.Next(20, 50));
+                _Drink.Sizes = Menu_Item_Sizes.Where(x => x.Menu_ItemID == Menu_Items.Count + 1).Distinct().ToList();
+                Menu_Items.Add(_Drink);
+            }
+            #endregion
+            Menu_listbox.ItemsSource = Menu_Items;
         }
 
         /// <summary>
@@ -155,22 +169,32 @@ namespace Pizza_House
         }
         private void SetDetails()
         {
+            foreach (var topping in Menu_Items[Menu_Id].Ingredients.Where(x => !x.Selected))
+                topping.Selected = true;
             Desc_Img.Source = new BitmapImage(new Uri("http://placekitten.com/" + rnd.Next(200, 900) + "/" + rnd.Next(200, 900)));
-            Sizes_combo.ItemsSource = Pizzas[Menu_Id].Sizes.Select(x => x.Size).OrderBy(x => x.PriceMod);
-            Sizes_combo.SelectedIndex = Pizzas[Menu_Id].Sizes.Select(x => x.Size).OrderBy(x => x.PriceMod).ToList().FindIndex(x => x.Name == "Normal");
-            Details_Name_lbl.Content = Pizzas[Menu_Id].Name;
-            Desc_Price_lbl.Content = "Price : " + Convert.ToInt32(Pizzas[Menu_Id].Price.Split(' ')[0]).ToString("N2") + " USD";
-            Ingredient_List.ItemsSource = Pizzas[Menu_Id].Ingredients.OrderBy(x => x.Ingredient.Type).Select(x => x.Ingredient.Name);
+            Sizes_combo.ItemsSource = Menu_Items[Menu_Id].Sizes.Select(x => x.Size).OrderBy(x => x.PriceMod);
+            Sizes_combo.SelectedIndex = Menu_Items[Menu_Id].Sizes.Select(x => x.Size).OrderBy(x => x.PriceMod).ToList().FindIndex(x => x.PriceMod == 0);
+            Details_Name_lbl.Content = Menu_Items[Menu_Id].Name;
+            Desc_Price_lbl.Content = "Price : " + Convert.ToInt32(Menu_Items[Menu_Id].Price.Split(' ')[0]).ToString("N2") + " USD";
+            Ingredient_List.ItemsSource = Menu_Items[Menu_Id].Ingredients.OrderBy(x => x.Ingredient.Type);
         }
 
-        private void Ingredient_List_SelectionChanged(object sender, SelectionChangedEventArgs e) => Ingredient_List.SelectedIndex = -1;
-
+        private void Ingredient_List_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (Ingredient_List.SelectedIndex == -1)
+                return;
+            Menu_Item_Ingredients item = (Menu_Item_Ingredients)Ingredient_List.SelectedItem;
+            if (item.Ingredient.Type != Ingredient_Type.Dough)
+                item.Selected = !item.Selected;
+            Ingredient_List.Items.Refresh();
+            Ingredient_List.SelectedIndex = -1;
+        }
         private void Sizes_combo_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (Sizes_combo.SelectedIndex == -1)
                 return;
-            float DefPrize = Convert.ToInt32(Pizzas[Menu_Id].Price.Split(' ')[0]);
-            float PrizeMod = Pizzas[Menu_Id].Sizes.OrderBy(x => x.Size.PriceMod).ElementAt(Sizes_combo.SelectedIndex).Size.PriceMod;
+            float DefPrize = Convert.ToInt32(Menu_Items[Menu_Id].Price.Split(' ')[0]);
+            float PrizeMod = Menu_Items[Menu_Id].Sizes.OrderBy(x => x.Size.PriceMod).ElementAt(Sizes_combo.SelectedIndex).Size.PriceMod;
             float tesP = DefPrize + (DefPrize * (PrizeMod / 100));
             //Desc_Price_lbl.Content = "Price : " + (DefPrize + (DefPrize*(PrizeMod/100)))+ " USD";
             Desc_Price_lbl.Content = "Price : " + tesP.ToString("N2") + " USD";
@@ -239,7 +263,8 @@ namespace Pizza_House
         {
             if (Menu_Id == -1)
                 return;
-            Pizza_amount_Con_lbl.Content = string.Format("How many of \n{0} \ndo you want?", Pizzas[Menu_Id].Name);
+            Pizza_amount_Con_lbl.Content = string.Format("How many of \n{0} \ndo you want?", Menu_Items[Menu_Id].Name);
+            Amount_txt.Text = "1";
             Change_Panel("Amount");
             Amount_txt.Focus();
         }
@@ -255,9 +280,13 @@ namespace Pizza_House
         private void Add_Amount_Btn_Click(object sender, RoutedEventArgs e)
         {
             Cart_Item NewCartItem = new Cart_Item();
-            NewCartItem.Menu_Item = Pizzas[Menu_Id];
+            NewCartItem.Menu_Item = Menu_Items[Menu_Id];
+            NewCartItem.RemovedIngredients = Menu_Items[Menu_Id].Ingredients.Where(x => !x.Selected).Select(x => x.Ingredient).ToList();
             NewCartItem.Size = (Model.Size)Sizes_combo.SelectedItem;
             NewCartItem.Amount = Convert.ToInt32(Amount_txt.Text);
+            float PizzaDefPrice = Convert.ToInt32(NewCartItem.Menu_Item.Price.Split(' ')[0]);
+            NewCartItem.Price = PizzaDefPrice + (PizzaDefPrice * (NewCartItem.Size.PriceMod / 100));
+            Change_Panel("Menu");
         }
     }
 }
