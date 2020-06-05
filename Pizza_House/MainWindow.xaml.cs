@@ -41,7 +41,7 @@ namespace Pizza_House
 
         public void SetUp()
         {
-            Change_Panel("Menu");
+            Change_Panel("Home");
             GenerateMenu();
             PrepareCustom();
         }
@@ -82,7 +82,7 @@ namespace Pizza_House
             {
                 Menu_Items _Pizza = new Menu_Items(Menu_Items.Count+1, "Pizza " + i);
                 _Pizza.Type = Menu_Item_Type.Pizza;
-                for (int x = 0; x < rnd.Next(4, 6); x++)
+                for (int x = 0; x < rnd.Next(7, 10); x++)
                 {
                     Menu_Item_Ingredients _Ingredients = new Menu_Item_Ingredients(i, rnd.Next(0, Ingredients.Count));
                     _Ingredients.Menu_Item = _Pizza;
@@ -92,13 +92,9 @@ namespace Pizza_House
                     else
                         Pizza_Ingredients.Add(_Ingredients);
                 }
-                Menu_Item_Sizes.Add(new Model.Menu_Item_Sizes(_Pizza, Sizes.Where(x => x.Type == Size_Type.Pizza).ToList()[0]));
-                while (Menu_Item_Sizes.Count(x => x.Menu_ItemID.ToString() == _Pizza.ID) < 3)
-                {
-                    Menu_Item_Sizes _Size = new Menu_Item_Sizes(_Pizza, Sizes.Where(x => x.Type == Size_Type.Pizza).ToList()[rnd.Next(1, Sizes.Where(x => x.Type == Size_Type.Pizza).ToList().Count)]);
-                    if (!Menu_Item_Sizes.Any(x => x.SizeID == _Size.SizeID && x.Menu_ItemID.ToString() == _Pizza.ID))
-                        Menu_Item_Sizes.Add(_Size);
-                }
+                foreach (Model.Size Size in Sizes.Where(x => x.Type == Size_Type.Pizza).ToList())
+                    Menu_Item_Sizes.Add(new Model.Menu_Item_Sizes(_Pizza, Size));
+
                 _Pizza.Ingredients = Pizza_Ingredients.Where(x => x.Menu_ItemID == i).ToList();
                 _Pizza.Sizes = Menu_Item_Sizes.Where(x => x.Menu_ItemID == i).Distinct().ToList();
                 Menu_Items.Add(_Pizza);
@@ -109,9 +105,8 @@ namespace Pizza_House
             {
                 Menu_Items _Drink = new Menu_Items(Menu_Items.Count + 1, "Drink " + i, Menu_Item_Type.Drink);
                 foreach (Model.Size Size in Sizes.Where(x => x.Type == Size_Type.Drink).ToList())
-                {
                     Menu_Item_Sizes.Add(new Model.Menu_Item_Sizes(_Drink, Size));
-                }
+
                 _Drink.Price = string.Format("{0}", rnd.Next(20, 50));
                 _Drink.Sizes = Menu_Item_Sizes.Where(x => x.Menu_ItemID == Menu_Items.Count + 1).Distinct().ToList();
                 Menu_Items.Add(_Drink);
@@ -202,7 +197,7 @@ namespace Pizza_House
 
         private void Menu_Img_MouseEnter(object sender, MouseEventArgs e)
         {
-            Image img = (Image)sender;
+             Image img = (Image)sender;
             img.Source = new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "..\\..\\Assets\\Hover_" + img.Tag.ToString().ToLower() + ".png"));
             Cursor = Cursors.Hand;
         }
