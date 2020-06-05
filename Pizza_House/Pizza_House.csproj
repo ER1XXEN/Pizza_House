@@ -73,8 +73,8 @@
     <Compile Include="Model\Cart_Item.cs" />
     <Compile Include="Model\Ingredient.cs" />
     <Compile Include="Model\Menu_Item.cs" />
-    <Compile Include="Model\Pizza_Ingredients.cs" />
-    <Compile Include="Model\Pizza_Sizes.cs" />
+    <Compile Include="Model\Menu_Item_Ingredients.cs" />
+    <Compile Include="Model\Menu_Item_Sizes.cs" />
     <Compile Include="Model\Size.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
@@ -135,6 +135,10 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Infomation\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Assets\check.png" />
+    <Resource Include="Assets\remove.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
