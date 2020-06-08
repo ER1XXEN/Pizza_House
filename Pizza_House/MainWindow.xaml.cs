@@ -32,6 +32,7 @@ namespace Pizza_House
         List<Model.Size> Sizes = new List<Model.Size>();
         List<Cart_Item> Cart_Content = new List<Cart_Item>();
         List<Discount_Set> Discounts = new List<Discount_Set>();
+        Cart Cart = new Cart();
         #endregion
 
         public MainWindow()
