@@ -61,6 +61,6 @@ namespace Pizza_House.Model
     public enum Menu_Item_Type
     {
         Pizza = 0,
-        Drink = 1
+        Drink = 1,
     }
 }

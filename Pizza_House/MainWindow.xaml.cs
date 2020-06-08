@@ -31,6 +31,7 @@ namespace Pizza_House
         List<Ingredient> Ingredients = new List<Ingredient>();
         List<Model.Size> Sizes = new List<Model.Size>();
         List<Cart_Item> Cart_Content = new List<Cart_Item>();
+        List<Discount_Set> Discounts = new List<Discount_Set>();
         #endregion
 
         public MainWindow()
@@ -41,9 +42,10 @@ namespace Pizza_House
 
         public void SetUp()
         {
-            Change_Panel("Home");
+            Change_Panel("Discount");
             GenerateMenu();
             PrepareCustom();
+            PrepareDiscount();
         }
 
         private void PrepareCustom()
@@ -54,6 +56,10 @@ namespace Pizza_House
             Custom_Dough_Combo.SelectedIndex = 1;
             Custom_Size_Combo.SelectedIndex = 1;
             FindPriceCustom();
+        }
+        private void PrepareDiscount()
+        {
+            Discount_listbox.ItemsSource = Discounts;
         }
 
         private void GenerateMenu()
@@ -77,10 +83,15 @@ namespace Pizza_House
             Sizes.Add(new Model.Size(6, "Medium", 0, Size_Type.Drink));
             Sizes.Add(new Model.Size(7, "Large", 20, Size_Type.Drink));
             #endregion
+            #region Discounts
+            Discounts.Add(new Discount_Set(Discounts.Count() + 1, Discount_Type.Percentage, new List<Menu_Item_Type>() { Menu_Item_Type.Pizza, Menu_Item_Type.Drink, Menu_Item_Type.Drink }, null, 20));
+            Discounts.Add(new Discount_Set(Discounts.Count() + 1, Discount_Type.Item, new List<Menu_Item_Type>() { Menu_Item_Type.Pizza, Menu_Item_Type.Pizza, Menu_Item_Type.Drink, Menu_Item_Type.Drink }, Ingredient_Type.Dough, 0, true));
+            Discounts.Add(new Discount_Set(Discounts.Count() + 1, Discount_Type.Item, new List<Menu_Item_Type>() { Menu_Item_Type.Pizza, Menu_Item_Type.Drink }, Ingredient_Type.Topping));
+            #endregion
             #region Pizzas
             for (int i = 1; i < amount; i++)
             {
-                Menu_Items _Pizza = new Menu_Items(Menu_Items.Count+1, "Pizza " + i);
+                Menu_Items _Pizza = new Menu_Items(Menu_Items.Count + 1, "Pizza " + i);
                 _Pizza.Type = Menu_Item_Type.Pizza;
                 for (int x = 0; x < rnd.Next(7, 10); x++)
                 {
@@ -197,7 +208,7 @@ namespace Pizza_House
 
         private void Menu_Img_MouseEnter(object sender, MouseEventArgs e)
         {
-             Image img = (Image)sender;
+            Image img = (Image)sender;
             img.Source = new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "..\\..\\Assets\\Hover_" + img.Tag.ToString().ToLower() + ".png"));
             Cursor = Cursors.Hand;
         }
@@ -283,5 +294,7 @@ namespace Pizza_House
             NewCartItem.Price = PizzaDefPrice + (PizzaDefPrice * (NewCartItem.Size.PriceMod / 100));
             Change_Panel("Menu");
         }
+
+        private void Discount_listbox_SelectionChanged(object sender, SelectionChangedEventArgs e) => Discount_listbox.SelectedIndex = -1;
     }
 }

@@ -70,7 +70,9 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Model\Cart.cs" />
     <Compile Include="Model\Cart_Item.cs" />
+    <Compile Include="Model\Discount_Set.cs" />
     <Compile Include="Model\Ingredient.cs" />
     <Compile Include="Model\Menu_Item.cs" />
     <Compile Include="Model\Menu_Item_Ingredients.cs" />
