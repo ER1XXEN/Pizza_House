@@ -53,10 +53,7 @@ namespace Pizza_House.Model
             ID = Nr.ToString();
             Name = name;
         }
-        //public override string ToString()
-        //{
-        //    return String.Format("{0} {1} {2} {3}", ID + 1, Name, Ingredients.FirstOrDefault().Ingredient.Name, Price);
-        //}
+
     }
     public enum Menu_Item_Type
     {

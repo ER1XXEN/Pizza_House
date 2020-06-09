@@ -43,7 +43,7 @@ namespace Pizza_House
 
         public void SetUp()
         {
-            Change_Panel("Discount");
+            Change_Panel("Menu");
             GenerateMenu();
             PrepareCustom();
             PrepareDiscount();
@@ -286,14 +286,36 @@ namespace Pizza_House
 
         private void Add_Amount_Btn_Click(object sender, RoutedEventArgs e)
         {
-            Cart_Item NewCartItem = new Cart_Item();
-            NewCartItem.Menu_Item = Menu_Items[Menu_Id];
-            NewCartItem.RemovedIngredients = Menu_Items[Menu_Id].Ingredients.Where(x => !x.Selected).Select(x => x.Ingredient).ToList();
-            NewCartItem.Size = (Model.Size)Sizes_combo.SelectedItem;
-            NewCartItem.Amount = Convert.ToInt32(Amount_txt.Text);
-            float PizzaDefPrice = Convert.ToInt32(NewCartItem.Menu_Item.Price.Split(' ')[0]);
-            NewCartItem.Price = PizzaDefPrice + (PizzaDefPrice * (NewCartItem.Size.PriceMod / 100));
+            for (int i = 0; i < Convert.ToInt32(Amount_txt.Text); i++)
+            {
+                Cart_Item NewCartItem = new Cart_Item();
+                NewCartItem.Menu_Item = Menu_Items[Menu_Id];
+                NewCartItem.RemovedIngredients = Menu_Items[Menu_Id].Ingredients.Where(x => !x.Selected).Select(x => x.Ingredient).ToList();
+                NewCartItem.Size = (Model.Size)Sizes_combo.SelectedItem;
+                float PizzaDefPrice = Convert.ToInt32(NewCartItem.Menu_Item.Price.Split(' ')[0]);
+                NewCartItem.Price = PizzaDefPrice + (PizzaDefPrice * (NewCartItem.Size.PriceMod / 100));
+                Cart.Cart_Items.Add(NewCartItem);
+            }
             Change_Panel("Menu");
+            CheckCart();
+        }
+
+        private void CheckCart()
+        {
+            int PizzaAmount = Cart.Cart_Items.Where(x => x.Menu_Item.Type == Menu_Item_Type.Pizza).Sum(x => x.Amount);
+            int DrinkAmount = Cart.Cart_Items.Where(x => x.Menu_Item.Type == Menu_Item_Type.Drink).Sum(x => x.Amount);
+            Discount_Set Discount = Discounts.Where(x => x.Items_Needed.Count(y => y == Menu_Item_Type.Pizza) <= PizzaAmount && x.Items_Needed.Count(y => y == Menu_Item_Type.Drink) <= DrinkAmount).OrderByDescending(x => x.Items_Needed).FirstOrDefault();
+            var T = Cart.Cart_Items.Select(x => x.Menu_Item.Ingredients).ToList();
+            Cart_listbox.ItemsSource = Cart.Cart_Items;
+            if (Discount != null)
+            {
+                //Pizza
+                Discount.Items.Concat(Cart.Cart_Items.Where(x => x.Menu_Item.Type == Menu_Item_Type.Pizza).Take(Discount.Items_Needed.Count(y => y == Menu_Item_Type.Pizza)).Select(x => x.Menu_Item).ToList()).ToList();
+                //Drink
+                Discount.Items.Concat(Cart.Cart_Items.Where(x => x.Menu_Item.Type == Menu_Item_Type.Drink).Take(Discount.Items_Needed.Count(y => y == Menu_Item_Type.Drink)).Select(x => x.Menu_Item).ToList()).ToList();
+            }
+            //Cart.Discounts.Add();
+            Order_Price_lbl.Content = Cart.Price + " USD";
         }
 
         private void Discount_listbox_SelectionChanged(object sender, SelectionChangedEventArgs e) => Discount_listbox.SelectedIndex = -1;

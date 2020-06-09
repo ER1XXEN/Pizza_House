@@ -100,10 +100,32 @@
                 <Button x:Name="Add_Amount_Btn" Content="Add to cart" Canvas.Left="336" Canvas.Top="187" Width="100" FontSize="16" Background="{x:Null}" Foreground="#FFFF6F00" BorderBrush="#FFFF6F00" FontWeight="Bold" RenderTransformOrigin="0.5,0.5" BorderThickness="1" Click="Add_Amount_Btn_Click"/>
                 <Image x:Name="Back_Amount_img" Height="49" Width="49" Source="undo-1.png" Tag="Details" MouseLeftButtonUp="Change_Panel" MouseEnter="MouseEnter_Hover" MouseLeave="MouseLeave_Hover"/>
             </Canvas>
-            <Canvas x:Name="Cart_Panel" HorizontalAlignment="Left" Height="411" VerticalAlignment="Top" Width="782" Canvas.Left="10" Canvas.Top="10" d:IsHidden="True">
+            <Canvas x:Name="Cart_Panel" HorizontalAlignment="Left" Height="411" VerticalAlignment="Top" Width="782" Canvas.Left="10" Canvas.Top="10">
                 <Image x:Name="Back_Cart_img" Height="49" Width="49" Source="undo-1.png" Tag="Home" MouseLeftButtonUp="Change_Panel" MouseEnter="MouseEnter_Hover" MouseLeave="MouseLeave_Hover"/>
+                <ListBox x:Name="Cart_listbox" Height="348" Canvas.Left="114" Width="396" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#FFF96D01" MouseEnter="MouseEnter_Hover" MouseLeave="MouseLeave_Hover" ScrollViewer.VerticalScrollBarVisibility="Hidden" ScrollViewer.HorizontalScrollBarVisibility="Disabled" Canvas.Top="53" SelectionChanged="Discount_listbox_SelectionChanged">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="100"/>
+                                    <ColumnDefinition Width="210"/>
+                                    <ColumnDefinition Width="140"/>
+                                </Grid.ColumnDefinitions>
+                                <TextBlock Grid.Column="0" Grid.Row="1" Text="{Binding Menu_Item.Name}" VerticalAlignment="Center" Margin="5"/>
+                                <TextBlock Grid.Column="1" Grid.Row="1" Text="{Binding Amount}" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="5"/>
+                                <TextBlock Grid.Column="2" Grid.Row="1" Text="{Binding _Price}" VerticalAlignment="Center" Margin="5"/>
+                            </Grid>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+                <Label Content="Name" Canvas.Left="123" Canvas.Top="18" Foreground="#FFFF6F00" FontSize="16" FontWeight="Bold"/>
+                <Label Content="Quantity" Canvas.Left="221" Canvas.Top="18" Foreground="#FFFF6F00" FontSize="16" FontWeight="Bold"/>
+                <Label Content="Price" Canvas.Left="431" Canvas.Top="18" Foreground="#FFFF6F00" FontSize="16" FontWeight="Bold"/>
+                <Label Content="Order Summary" Canvas.Left="592" Canvas.Top="18" Foreground="#FFFF6F00" FontSize="16" FontWeight="Bold"/>
+                <Label Content="Order Summary" Canvas.Left="611" Canvas.Top="53" Foreground="#FFFF6F00" FontSize="10"/>
+                <Label x:Name="Order_Price_lbl" Content="0 USD" Canvas.Left="696" Canvas.Top="53" Foreground="#FFFF6F00" FontSize="10" FontWeight="Bold" Width="86"/>
             </Canvas>
-            <Canvas x:Name="Discount_Panel" HorizontalAlignment="Left" Height="411" VerticalAlignment="Top" Width="782" Canvas.Left="10" Canvas.Top="10">
+            <Canvas x:Name="Discount_Panel" HorizontalAlignment="Left" Height="411" VerticalAlignment="Top" Width="782" Canvas.Left="10" Canvas.Top="10" d:IsHidden="True">
                 <Image x:Name="Back_Discount_img" Height="49" Width="49" Source="undo-1.png" Tag="Home" MouseLeftButtonUp="Change_Panel" MouseEnter="MouseEnter_Hover" MouseLeave="MouseLeave_Hover"/>
                 <ListBox x:Name="Discount_listbox" Height="347" Canvas.Left="122" Width="511" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#FFF96D01" MouseEnter="MouseEnter_Hover" MouseLeave="MouseLeave_Hover" ScrollViewer.VerticalScrollBarVisibility="Hidden" ScrollViewer.HorizontalScrollBarVisibility="Disabled" Canvas.Top="54" SelectionChanged="Discount_listbox_SelectionChanged">
                     <ListBox.ItemTemplate>

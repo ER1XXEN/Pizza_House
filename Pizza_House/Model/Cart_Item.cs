@@ -8,9 +8,11 @@ namespace Pizza_House.Model
 {
     class Cart_Item
     {
+        public string _Price { get { return Price + " USD"; } set { } }
         public Menu_Items Menu_Item { get; set; }
         public virtual List<Ingredient> RemovedIngredients { get; set; }
         public Size Size { get; set; }
+        public int Amount { get; set; } = 1;
         public float Price
         {
             get
@@ -21,6 +23,5 @@ namespace Pizza_House.Model
             }
             set { }
         }
-        public int Amount { get; set; }
     }
 }
