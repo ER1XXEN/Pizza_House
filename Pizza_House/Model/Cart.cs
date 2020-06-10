@@ -8,17 +8,24 @@ namespace Pizza_House.Model
 {
     class Cart
     {
+        public float _Price { get; set; } = 0;
+
         public virtual List<Cart_Item> Cart_Items { get; set; } = new List<Cart_Item>();
         public virtual List<Discount_Set> Discounts { get; set; } = new List<Discount_Set>();
+        public List<Ingredient> _Ingredients { get => Cart_Items.SelectMany(x => x._Ingredients).OrderBy(x => x.Price).ToList(); set { } }
         public float Price
         {
             get
             {
-                float DefPrice = Cart_Items.Sum(x => x.Price * x.Amount);
+                float DefPrice = _Price;
+                if (DefPrice == 0)
+                DefPrice= this.Cart_Items.Sum(x => x._Price * x.Amount) + this.Discounts.Where(x => x.Type == Discount_Type.Item).Sum(x => x._Price);
                 return DefPrice;
             }
             set
-            { }
+            {
+                _Price = value;
+            }
         }
     }
 }

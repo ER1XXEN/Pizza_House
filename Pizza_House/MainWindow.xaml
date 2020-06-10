@@ -102,18 +102,18 @@
             </Canvas>
             <Canvas x:Name="Cart_Panel" HorizontalAlignment="Left" Height="411" VerticalAlignment="Top" Width="782" Canvas.Left="10" Canvas.Top="10">
                 <Image x:Name="Back_Cart_img" Height="49" Width="49" Source="undo-1.png" Tag="Home" MouseLeftButtonUp="Change_Panel" MouseEnter="MouseEnter_Hover" MouseLeave="MouseLeave_Hover"/>
-                <ListBox x:Name="Cart_listbox" Height="348" Canvas.Left="114" Width="396" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#FFF96D01" MouseEnter="MouseEnter_Hover" MouseLeave="MouseLeave_Hover" ScrollViewer.VerticalScrollBarVisibility="Hidden" ScrollViewer.HorizontalScrollBarVisibility="Disabled" Canvas.Top="53" SelectionChanged="Discount_listbox_SelectionChanged">
+                <ListBox x:Name="Cart_listbox" Height="348" Canvas.Left="114" Width="396" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#FFF96D01" MouseEnter="MouseEnter_Hover" MouseLeave="MouseLeave_Hover" ScrollViewer.VerticalScrollBarVisibility="Hidden" ScrollViewer.HorizontalScrollBarVisibility="Disabled" Canvas.Top="53">
                     <ListBox.ItemTemplate>
                         <DataTemplate>
                             <Grid>
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="100"/>
-                                    <ColumnDefinition Width="210"/>
                                     <ColumnDefinition Width="140"/>
+                                    <ColumnDefinition Width="210"/>
                                 </Grid.ColumnDefinitions>
-                                <TextBlock Grid.Column="0" Grid.Row="1" Text="{Binding Menu_Item.Name}" VerticalAlignment="Center" Margin="5"/>
+                                <TextBlock Grid.Column="0" Grid.Row="1" Text="{Binding Name}" VerticalAlignment="Center" Margin="5"/>
                                 <TextBlock Grid.Column="1" Grid.Row="1" Text="{Binding Amount}" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="5"/>
-                                <TextBlock Grid.Column="2" Grid.Row="1" Text="{Binding _Price}" VerticalAlignment="Center" Margin="5"/>
+                                <TextBlock Grid.Column="2" Grid.Row="1" Text="{Binding Path=_Price,StringFormat=' {0} USD'}" VerticalAlignment="Center" Margin="5"/>
                             </Grid>
                         </DataTemplate>
                     </ListBox.ItemTemplate>
@@ -123,7 +123,7 @@
                 <Label Content="Price" Canvas.Left="431" Canvas.Top="18" Foreground="#FFFF6F00" FontSize="16" FontWeight="Bold"/>
                 <Label Content="Order Summary" Canvas.Left="592" Canvas.Top="18" Foreground="#FFFF6F00" FontSize="16" FontWeight="Bold"/>
                 <Label Content="Order Summary" Canvas.Left="611" Canvas.Top="53" Foreground="#FFFF6F00" FontSize="10"/>
-                <Label x:Name="Order_Price_lbl" Content="0 USD" Canvas.Left="696" Canvas.Top="53" Foreground="#FFFF6F00" FontSize="10" FontWeight="Bold" Width="86"/>
+                <Label x:Name="Order_Price_lbl" Content="0 USD" Canvas.Left="696" Canvas.Top="53" Foreground="#FFFF6F00" FontSize="10" VerticalAlignment="Center" FontWeight="Bold" Width="86" Height="27"/>
             </Canvas>
             <Canvas x:Name="Discount_Panel" HorizontalAlignment="Left" Height="411" VerticalAlignment="Top" Width="782" Canvas.Left="10" Canvas.Top="10" d:IsHidden="True">
                 <Image x:Name="Back_Discount_img" Height="49" Width="49" Source="undo-1.png" Tag="Home" MouseLeftButtonUp="Change_Panel" MouseEnter="MouseEnter_Hover" MouseLeave="MouseLeave_Hover"/>

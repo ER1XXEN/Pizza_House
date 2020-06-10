@@ -54,6 +54,13 @@ namespace Pizza_House.Model
             Name = name;
         }
 
+        public Menu_Items(int ID,List<Menu_Item_Ingredients> ingredients, string Name)
+        {
+            this.ID = ID.ToString();
+            Ingredients = ingredients;
+            this.Name = Name;
+        }
+
     }
     public enum Menu_Item_Type
     {

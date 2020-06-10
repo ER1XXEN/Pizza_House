@@ -22,20 +22,11 @@ namespace Pizza_House.Model
         public string Name { get; set; } = "Discount";
         public Discount_Type Type { get; set; }
         public virtual List<Menu_Item_Type> Items_Needed { get; set; }
-        public virtual List<Menu_Items> Items { get; set; } = new List<Menu_Items>();
         public Ingredient_Type? Item_Type { get; set; } = null;
         public int Percentage { get; set; }
         public bool Top { get; set; } = false;
 
-        public float _Price
-        {
-            get {
-                float price = 0;
-                return price;
-
-            }
-            set { }
-        }
+        public float _Price { get; set; } = 0;
 
         public string GetTarget()
         {
