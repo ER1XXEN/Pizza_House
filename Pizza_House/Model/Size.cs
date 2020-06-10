@@ -6,12 +6,20 @@ using System.Threading.Tasks;
 
 namespace Pizza_House.Model
 {
-    class Size
+    #region Class
+
+    internal class Size
     {
+        #region Properties
+
         public int ID { get; set; }
         public string Name { get; set; }
         public int PriceMod { get; set; }
         public Size_Type Type { get; set; }
+
+        #endregion Properties
+
+        #region Constructors
 
         public Size(int id, string name, int mod, Size_Type type)
         {
@@ -20,14 +28,28 @@ namespace Pizza_House.Model
             PriceMod = mod;
             Type = type;
         }
+
+        #endregion Constructors
+
+        #region Overrides
+
         public override string ToString()
         {
-            return Name + "\t\r" + PriceMod+"% To final Price";
+            return Name + "\t\r" + PriceMod + "% To final Price";
         }
+
+        #endregion Overrides
     }
+
+    #endregion Class
+
+    #region Enum
+
     public enum Size_Type
     {
         Pizza = 0,
         Drink = 1
     }
+
+    #endregion Enum
 }

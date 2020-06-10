@@ -6,12 +6,20 @@ using System.Threading.Tasks;
 
 namespace Pizza_House.Model
 {
-    class Menu_Item_Sizes
+    #region Class
+
+    internal class Menu_Item_Sizes
     {
+        #region Properties
+
         public virtual Menu_Items Menu_Items { get; set; }
         public int Menu_ItemID { get; set; }
         public virtual Size Size { get; set; }
         public int SizeID { get; set; }
+
+        #endregion Properties
+
+        #region Constructors
 
         public Menu_Item_Sizes(Menu_Items Menu_Items, Size size)
         {
@@ -20,5 +28,9 @@ namespace Pizza_House.Model
             Size = size;
             SizeID = size.ID;
         }
+
+        #endregion Constructors
     }
+
+    #endregion Class
 }

@@ -5,45 +5,44 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Pizza_House"
         mc:Ignorable="d"
-        Title="Tech-Pizza" Height="450" Width="800" ResizeMode="NoResize" >
+        Title="Tech-Pizza" Height="450" Width="800" ResizeMode="NoResize">
     <Window.Resources>
         <Style x:Key="ImageChecked" TargetType="Image">
             <Style.Triggers>
                 <DataTrigger Binding="{Binding Selected}" Value="True">
-                    <Setter Property="Source" Value="Assets/check.png"/>
-                    <Setter Property="Margin" Value="0 0 5 0"/>
+                    <Setter Property="Source" Value="Assets/check.png" />
+                    <Setter Property="Margin" Value="0 0 5 0" />
                 </DataTrigger>
 
                 <DataTrigger Binding="{Binding Selected}" Value="False">
-                    <Setter Property="Source" Value="Assets/remove.png"/>
-                    <Setter Property="Margin" Value="0 0 5 0"/>
+                    <Setter Property="Source" Value="Assets/remove.png" />
+                    <Setter Property="Margin" Value="0 0 5 0" />
                 </DataTrigger>
             </Style.Triggers>
         </Style>
-        <DataTemplate x:Key="CustomListBoxItemTemplate" >
+        <DataTemplate x:Key="CustomListBoxItemTemplate">
             <WrapPanel>
                 <Image Width="20" Height="20" Style="{StaticResource ImageChecked}" VerticalAlignment="Center" />
                 <ContentPresenter Content="{Binding}"  Margin="2,0" />
             </WrapPanel>
         </DataTemplate>
-        <DataTemplate x:Key="DetailsListBoxItemTemplate" >
+        <DataTemplate x:Key="DetailsListBoxItemTemplate">
             <WrapPanel>
                 <Image Width="20" Height="20" Style="{StaticResource ImageChecked}" VerticalAlignment="Center" />
                 <ContentPresenter Content="{Binding Ingredient.Name}"  Margin="2,0" />
             </WrapPanel>
         </DataTemplate>
-
     </Window.Resources>
     <Grid Background="#FF3D3D3D">
         <Canvas x:Name="Body" HorizontalAlignment="Left" Height="420" VerticalAlignment="Top" Width="794" Margin="0,0,-0.4,0">
             <Canvas x:Name="Home_Panel" HorizontalAlignment="Left" Height="411" VerticalAlignment="Top" Width="782" Canvas.Left="10" Canvas.Top="10" d:IsHidden="True">
-                <Image x:Name="Menu_Img" Height="158" Canvas.Left="183" Canvas.Top="25" Width="158" Source="menu.png" MouseLeftButtonUp="Change_Panel" Tag="Menu" MouseEnter="Menu_Img_MouseEnter" MouseLeave="Menu_Img_MouseLeave"/>
-                <Image x:Name="Discount_Img" Height="158" Canvas.Left="434" Canvas.Top="226" Width="158" Source="discount.png" Tag="Discount" MouseEnter="Menu_Img_MouseEnter" MouseLeave="Menu_Img_MouseLeave" MouseLeftButtonUp="Change_Panel"/>
-                <Image x:Name="Custom_Img" Height="158" Canvas.Left="183" Canvas.Top="226" Width="157" Source="custom.png" MouseLeftButtonUp="Change_Panel" Tag="Custom" MouseEnter="Menu_Img_MouseEnter" MouseLeave="Menu_Img_MouseLeave"/>
-                <Image x:Name="Cart_Img" Height="158" Canvas.Left="434" Canvas.Top="25" Width="158" Source="cart.png" Tag="Cart" MouseEnter="Menu_Img_MouseEnter" MouseLeave="Menu_Img_MouseLeave" MouseLeftButtonUp="Change_Panel"/>
+                <Image x:Name="Menu_Img" Height="158" Canvas.Left="183" Canvas.Top="25" Width="158" Source="menu.png" MouseLeftButtonUp="Change_Panel" Tag="Menu" MouseEnter="Menu_Img_MouseEnter" MouseLeave="Menu_Img_MouseLeave" />
+                <Image x:Name="Discount_Img" Height="158" Canvas.Left="434" Canvas.Top="226" Width="158" Source="discount.png" Tag="Discount" MouseEnter="Menu_Img_MouseEnter" MouseLeave="Menu_Img_MouseLeave" MouseLeftButtonUp="Change_Panel" />
+                <Image x:Name="Custom_Img" Height="158" Canvas.Left="183" Canvas.Top="226" Width="157" Source="custom.png" MouseLeftButtonUp="Change_Panel" Tag="Custom" MouseEnter="Menu_Img_MouseEnter" MouseLeave="Menu_Img_MouseLeave" />
+                <Image x:Name="Cart_Img" Height="158" Canvas.Left="434" Canvas.Top="25" Width="158" Source="cart.png" Tag="Cart" MouseEnter="Menu_Img_MouseEnter" MouseLeave="Menu_Img_MouseLeave" MouseLeftButtonUp="Change_Panel" />
             </Canvas>
             <Canvas x:Name="Menu_Panel" HorizontalAlignment="Left" Height="411" VerticalAlignment="Top" Width="782" Canvas.Left="10" Canvas.Top="10" d:IsHidden="True">
-                <Image x:Name="Back_Menu_img" Height="49" Width="49" Source="undo-1.png" Tag="Home" MouseLeftButtonUp="Change_Panel" MouseEnter="MouseEnter_Hover" MouseLeave="MouseLeave_Hover"/>
+                <Image x:Name="Back_Menu_img" Height="49" Width="49" Source="undo-1.png" Tag="Home" MouseLeftButtonUp="Change_Panel" MouseEnter="MouseEnter_Hover" MouseLeave="MouseLeave_Hover" />
                 <ListBox x:Name="Menu_listbox" Height="347" Canvas.Left="79" Width="598" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#FFF96D01" SelectionChanged="Menu_listbox_SelectionChanged" MouseEnter="MouseEnter_Hover" MouseLeave="MouseLeave_Hover" ScrollViewer.VerticalScrollBarVisibility="Hidden" ScrollViewer.HorizontalScrollBarVisibility="Disabled" Canvas.Top="48">
                     <ListBox.ItemTemplate>
                         <DataTemplate>
@@ -64,90 +63,89 @@
                         </DataTemplate>
                     </ListBox.ItemTemplate>
                 </ListBox>
-                <Label Content="Nr" Canvas.Left="85" Canvas.Top="17" Foreground="#FFFF6F00" FontSize="16" FontWeight="Bold"/>
-                <Label Content="Name" Canvas.Left="133" Canvas.Top="17" Foreground="#FFFF6F00" FontSize="16" FontWeight="Bold"/>
-                <Label Content="Toppings" Canvas.Left="276" Canvas.Top="17" Foreground="#FFFF6F00" FontSize="16" FontWeight="Bold"/>
-                <Label Content="Price" Canvas.Left="576" Canvas.Top="17" Foreground="#FFFF6F00" FontSize="16" FontWeight="Bold"/>
-                <Label Content="Type" Canvas.Left="203" Canvas.Top="17" Foreground="#FFFF6F00" FontSize="16" FontWeight="Bold"/>
+                <Label Content="Nr" Canvas.Left="85" Canvas.Top="17" Foreground="#FFFF6F00" FontSize="16" FontWeight="Bold" />
+                <Label Content="Name" Canvas.Left="133" Canvas.Top="17" Foreground="#FFFF6F00" FontSize="16" FontWeight="Bold" />
+                <Label Content="Toppings" Canvas.Left="276" Canvas.Top="17" Foreground="#FFFF6F00" FontSize="16" FontWeight="Bold" />
+                <Label Content="Price" Canvas.Left="576" Canvas.Top="17" Foreground="#FFFF6F00" FontSize="16" FontWeight="Bold" />
+                <Label Content="Type" Canvas.Left="203" Canvas.Top="17" Foreground="#FFFF6F00" FontSize="16" FontWeight="Bold" />
             </Canvas>
             <Canvas x:Name="Details_Panel" HorizontalAlignment="Left" Height="421" VerticalAlignment="Top" Width="792" d:IsHidden="True">
-                <Image x:Name="Desc_Img" Height="206" Canvas.Left="88" Canvas.Top="78" Width="206"/>
-                <Label x:Name="Desc_Price_lbl" Content="" Canvas.Left="88" Canvas.Top="332" Width="206" Height="36" FontSize="20" Foreground="#FFF96D01"/>
-                <Button x:Name="Add_Btn" Content="Select amount" Canvas.Left="130" Canvas.Top="373" Width="121" FontSize="16" Background="{x:Null}" Foreground="#FFFF6F00" BorderBrush="#FFFF6F00" FontWeight="Bold" RenderTransformOrigin="0.5,0.5" BorderThickness="1" Click="Add_Btn_Click"/>
-                <Image x:Name="Back_Detail_img" Height="49" Canvas.Left="10" Canvas.Top="10" Width="49" Source="undo-1.png" Tag="Menu" MouseLeftButtonUp="Change_Panel" MouseEnter="MouseEnter_Hover" MouseLeave="MouseLeave_Hover"/>
-                <ListBox x:Name="Ingredient_List" Height="283" Canvas.Left="421" Canvas.Top="85" Width="281" ItemTemplate="{StaticResource DetailsListBoxItemTemplate}" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#FFF96D01" SelectionChanged="Ingredient_List_SelectionChanged"/>
-                <Label Content="Ingredients" Canvas.Left="421" Canvas.Top="45" Width="235" Height="32" Foreground="#FFF96D01" FontWeight="Bold" FontSize="16"/>
-                <Label x:Name="Details_Name_lbl" Content="" Canvas.Left="88" Canvas.Top="33" Width="206" Height="32" Foreground="#FFF96D01" FontWeight="Bold" FontSize="16"/>
-                <ComboBox x:Name="Sizes_combo" Canvas.Left="88" Canvas.Top="290" Width="206" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#FFF96D0F" SelectionChanged="Sizes_combo_SelectionChanged"/>
+                <Image x:Name="Desc_Img" Height="206" Canvas.Left="88" Canvas.Top="78" Width="206" />
+                <Label x:Name="Desc_Price_lbl" Content="" Canvas.Left="88" Canvas.Top="332" Width="206" Height="36" FontSize="20" Foreground="#FFF96D01" />
+                <Button x:Name="Add_Btn" Content="Select amount" Canvas.Left="130" Canvas.Top="373" Width="121" FontSize="16" Background="{x:Null}" Foreground="#FFFF6F00" BorderBrush="#FFFF6F00" FontWeight="Bold" RenderTransformOrigin="0.5,0.5" BorderThickness="1" Click="Add_Btn_Click" />
+                <Image x:Name="Back_Detail_img" Height="49" Canvas.Left="10" Canvas.Top="10" Width="49" Source="undo-1.png" Tag="Menu" MouseLeftButtonUp="Change_Panel" MouseEnter="MouseEnter_Hover" MouseLeave="MouseLeave_Hover" />
+                <ListBox x:Name="Ingredient_List" Height="283" Canvas.Left="421" Canvas.Top="85" Width="281" ItemTemplate="{StaticResource DetailsListBoxItemTemplate}" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#FFF96D01" SelectionChanged="Ingredient_List_SelectionChanged" />
+                <Label Content="Ingredients" Canvas.Left="421" Canvas.Top="45" Width="235" Height="32" Foreground="#FFF96D01" FontWeight="Bold" FontSize="16" />
+                <Label x:Name="Details_Name_lbl" Content="" Canvas.Left="88" Canvas.Top="33" Width="206" Height="32" Foreground="#FFF96D01" FontWeight="Bold" FontSize="16" />
+                <ComboBox x:Name="Sizes_combo" Canvas.Left="88" Canvas.Top="290" Width="206" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#FFF96D0F" SelectionChanged="Sizes_combo_SelectionChanged" />
             </Canvas>
             <Canvas x:Name="Custom_Panel" HorizontalAlignment="Left" Height="411" VerticalAlignment="Top" Width="782" Canvas.Left="10" Canvas.Top="10" d:IsHidden="True">
-                <Image x:Name="Back_Custom_img" Height="49" Width="49" Source="undo-1.png" Tag="Home" MouseLeftButtonUp="Change_Panel" MouseEnter="MouseEnter_Hover" MouseLeave="MouseLeave_Hover"/>
-                <Label Content="Dough" Canvas.Left="98" Canvas.Top="17" Foreground="#FFFF6F00" FontSize="16" FontWeight="Bold"/>
-                <Label Content="Size" Canvas.Left="98" Canvas.Top="136" Foreground="#FFFF6F00" FontSize="16" FontWeight="Bold"/>
-                <Label Content="Toppings" Canvas.Left="333" Canvas.Top="17" Foreground="#FFFF6F00" FontSize="16" FontWeight="Bold"/>
-                <Label x:Name="Custom_Price_lbl" Content="[Price] USD" Canvas.Left="656" Canvas.Top="42" Foreground="#FFFF6F00" FontSize="14" FontWeight="Bold"/>
-                <Label Content="Price for pizza" Canvas.Left="656" Canvas.Top="13" Foreground="#FFFF6F00" FontSize="14"/>
+                <Image x:Name="Back_Custom_img" Height="49" Width="49" Source="undo-1.png" Tag="Home" MouseLeftButtonUp="Change_Panel" MouseEnter="MouseEnter_Hover" MouseLeave="MouseLeave_Hover" />
+                <Label Content="Dough" Canvas.Left="98" Canvas.Top="17" Foreground="#FFFF6F00" FontSize="16" FontWeight="Bold" />
+                <Label Content="Size" Canvas.Left="98" Canvas.Top="136" Foreground="#FFFF6F00" FontSize="16" FontWeight="Bold" />
+                <Label Content="Toppings" Canvas.Left="333" Canvas.Top="17" Foreground="#FFFF6F00" FontSize="16" FontWeight="Bold" />
+                <Label x:Name="Custom_Price_lbl" Content="[Price] USD" Canvas.Left="656" Canvas.Top="42" Foreground="#FFFF6F00" FontSize="14" FontWeight="Bold" />
+                <Label Content="Price for pizza" Canvas.Left="656" Canvas.Top="13" Foreground="#FFFF6F00" FontSize="14" />
                 <ListBox HorizontalAlignment="Stretch" Name="Custom_Topping_Listbox"
-                 VerticalAlignment="Stretch" Width="256" Grid.Row="1" HorizontalContentAlignment="Left" ItemTemplate="{StaticResource CustomListBoxItemTemplate}" VerticalContentAlignment="Top" Foreground="#FFFF6F00" SelectionMode="Single" Canvas.Left="333" Canvas.Top="54" Background="{x:Null}" BorderBrush="{x:Null}" Height="333" SelectionChanged="Custom_Topping_Listbox_SelectionChanged"/>
-                <Button x:Name="Add_Btn_Copy" Content="Add to cart" Canvas.Left="656" Canvas.Top="75" Width="96" FontSize="14" Background="{x:Null}" Foreground="#FFFF6F00" BorderBrush="#FFFF6F00" FontWeight="Bold" RenderTransformOrigin="0.5,0.5" BorderThickness="1" Height="24" Click="Add_Btn_Copy_Click"/>
-                <ComboBox x:Name="Custom_Dough_Combo" Canvas.Left="98" Canvas.Top="66" Width="163" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#FFF96D0F" SelectionChanged="Custom_Dough_Combo_SelectionChanged"/>
-                <ComboBox x:Name="Custom_Size_Combo" Canvas.Left="98" Canvas.Top="168" Width="163" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#FFF96D0F" SelectionChanged="Custom_Dough_Combo_SelectionChanged" SelectedIndex="1"/>
+                 VerticalAlignment="Stretch" Width="256" Grid.Row="1" HorizontalContentAlignment="Left" ItemTemplate="{StaticResource CustomListBoxItemTemplate}" VerticalContentAlignment="Top" Foreground="#FFFF6F00" SelectionMode="Single" Canvas.Left="333" Canvas.Top="54" Background="{x:Null}" BorderBrush="{x:Null}" Height="333" SelectionChanged="Custom_Topping_Listbox_SelectionChanged" />
+                <Button x:Name="Add_Btn_Copy" Content="Add to cart" Canvas.Left="656" Canvas.Top="75" Width="96" FontSize="14" Background="{x:Null}" Foreground="#FFFF6F00" BorderBrush="#FFFF6F00" FontWeight="Bold" RenderTransformOrigin="0.5,0.5" BorderThickness="1" Height="24" Click="Add_Btn_Copy_Click" />
+                <ComboBox x:Name="Custom_Dough_Combo" Canvas.Left="98" Canvas.Top="66" Width="163" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#FFF96D0F" SelectionChanged="Custom_Dough_Combo_SelectionChanged" />
+                <ComboBox x:Name="Custom_Size_Combo" Canvas.Left="98" Canvas.Top="168" Width="163" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#FFF96D0F" SelectionChanged="Custom_Dough_Combo_SelectionChanged" SelectedIndex="1" />
             </Canvas>
             <Canvas x:Name="Amount_Panel" HorizontalAlignment="Left" Height="411" VerticalAlignment="Top" Width="782" Canvas.Left="9.6" Canvas.Top="9.6" d:IsHidden="True">
-                <Label x:Name="Pizza_amount_Con_lbl" Content="How many of &#xA;[Pizza Name] &#xA;do you want?" Canvas.Left="336" Canvas.Top="75" Width="124" Foreground="#FFFF6F00" FontWeight="Bold" FontSize="16" Height="75"/>
-                <TextBox x:Name="Amount_txt" Height="23" Canvas.Left="389" TextWrapping="Wrap" Text="1" Canvas.Top="155" Width="35" Background="{x:Null}" BorderBrush="#FFFF6F00" SelectionBrush="Red" Foreground="#FFFF6F00" BorderThickness="0,0,0,2" TextChanged="Amount_txt_TextChanged" FontSize="16"/>
-                <Label Content="I want" Canvas.Left="336" Canvas.Top="150" Foreground="#FFFF6F00" FontSize="16"/>
-                <Button x:Name="Add_Amount_Btn" Content="Add to cart" Canvas.Left="336" Canvas.Top="187" Width="100" FontSize="16" Background="{x:Null}" Foreground="#FFFF6F00" BorderBrush="#FFFF6F00" FontWeight="Bold" RenderTransformOrigin="0.5,0.5" BorderThickness="1" Click="Add_Amount_Btn_Click"/>
-                <Image x:Name="Back_Amount_img" Height="49" Width="49" Source="undo-1.png" Tag="Details" MouseLeftButtonUp="Change_Panel" MouseEnter="MouseEnter_Hover" MouseLeave="MouseLeave_Hover"/>
+                <Label x:Name="Pizza_amount_Con_lbl" Content="How many of &#xA;[Pizza Name] &#xA;do you want?" Canvas.Left="336" Canvas.Top="75" Width="124" Foreground="#FFFF6F00" FontWeight="Bold" FontSize="16" Height="75" />
+                <TextBox x:Name="Amount_txt" Height="23" Canvas.Left="389" TextWrapping="Wrap" Text="1" Canvas.Top="155" Width="35" Background="{x:Null}" BorderBrush="#FFFF6F00" SelectionBrush="Red" Foreground="#FFFF6F00" BorderThickness="0,0,0,2" TextChanged="Amount_txt_TextChanged" FontSize="16" />
+                <Label Content="I want" Canvas.Left="336" Canvas.Top="150" Foreground="#FFFF6F00" FontSize="16" />
+                <Button x:Name="Add_Amount_Btn" Content="Add to cart" Canvas.Left="336" Canvas.Top="187" Width="100" FontSize="16" Background="{x:Null}" Foreground="#FFFF6F00" BorderBrush="#FFFF6F00" FontWeight="Bold" RenderTransformOrigin="0.5,0.5" BorderThickness="1" Click="Add_Amount_Btn_Click" />
+                <Image x:Name="Back_Amount_img" Height="49" Width="49" Source="undo-1.png" Tag="Details" MouseLeftButtonUp="Change_Panel" MouseEnter="MouseEnter_Hover" MouseLeave="MouseLeave_Hover" />
             </Canvas>
             <Canvas x:Name="Cart_Panel" HorizontalAlignment="Left" Height="411" VerticalAlignment="Top" Width="782" Canvas.Left="10" Canvas.Top="10">
-                <Image x:Name="Back_Cart_img" Height="49" Width="49" Source="undo-1.png" Tag="Home" MouseLeftButtonUp="Change_Panel" MouseEnter="MouseEnter_Hover" MouseLeave="MouseLeave_Hover"/>
+                <Image x:Name="Back_Cart_img" Height="49" Width="49" Source="undo-1.png" Tag="Home" MouseLeftButtonUp="Change_Panel" MouseEnter="MouseEnter_Hover" MouseLeave="MouseLeave_Hover" />
                 <ListBox x:Name="Cart_listbox" Height="348" Canvas.Left="114" Width="396" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#FFF96D01" MouseEnter="MouseEnter_Hover" MouseLeave="MouseLeave_Hover" ScrollViewer.VerticalScrollBarVisibility="Hidden" ScrollViewer.HorizontalScrollBarVisibility="Disabled" Canvas.Top="53">
                     <ListBox.ItemTemplate>
                         <DataTemplate>
                             <Grid>
                                 <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="100"/>
-                                    <ColumnDefinition Width="140"/>
-                                    <ColumnDefinition Width="210"/>
+                                    <ColumnDefinition Width="100" />
+                                    <ColumnDefinition Width="140" />
+                                    <ColumnDefinition Width="210" />
                                 </Grid.ColumnDefinitions>
-                                <TextBlock Grid.Column="0" Grid.Row="1" Text="{Binding Name}" VerticalAlignment="Center" Margin="5"/>
-                                <TextBlock Grid.Column="1" Grid.Row="1" Text="{Binding Amount}" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="5"/>
-                                <TextBlock Grid.Column="2" Grid.Row="1" Text="{Binding Path=_Price,StringFormat=' {0} USD'}" VerticalAlignment="Center" Margin="5"/>
+                                <TextBlock Grid.Column="0" Grid.Row="1" Text="{Binding Name}" VerticalAlignment="Center" Margin="5" />
+                                <TextBlock Grid.Column="1" Grid.Row="1" Text="{Binding Amount}" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="5" />
+                                <TextBlock Grid.Column="2" Grid.Row="1" Text="{Binding Path=_Price,StringFormat=' {0} USD'}" VerticalAlignment="Center" Margin="5" />
                             </Grid>
                         </DataTemplate>
                     </ListBox.ItemTemplate>
                 </ListBox>
-                <Label Content="Name" Canvas.Left="123" Canvas.Top="18" Foreground="#FFFF6F00" FontSize="16" FontWeight="Bold"/>
-                <Label Content="Quantity" Canvas.Left="221" Canvas.Top="18" Foreground="#FFFF6F00" FontSize="16" FontWeight="Bold"/>
-                <Label Content="Price" Canvas.Left="431" Canvas.Top="18" Foreground="#FFFF6F00" FontSize="16" FontWeight="Bold"/>
-                <Label Content="Order Summary" Canvas.Left="592" Canvas.Top="18" Foreground="#FFFF6F00" FontSize="16" FontWeight="Bold"/>
-                <Label Content="Order Summary" Canvas.Left="611" Canvas.Top="53" Foreground="#FFFF6F00" FontSize="10"/>
-                <Label x:Name="Order_Price_lbl" Content="0 USD" Canvas.Left="696" Canvas.Top="53" Foreground="#FFFF6F00" FontSize="10" VerticalAlignment="Center" FontWeight="Bold" Width="86" Height="27"/>
+                <Label Content="Name" Canvas.Left="123" Canvas.Top="18" Foreground="#FFFF6F00" FontSize="16" FontWeight="Bold" />
+                <Label Content="Quantity" Canvas.Left="221" Canvas.Top="18" Foreground="#FFFF6F00" FontSize="16" FontWeight="Bold" />
+                <Label Content="Price" Canvas.Left="431" Canvas.Top="18" Foreground="#FFFF6F00" FontSize="16" FontWeight="Bold" />
+                <Label Content="Order Summary" Canvas.Left="592" Canvas.Top="18" Foreground="#FFFF6F00" FontSize="16" FontWeight="Bold" />
+                <Label Content="Order Summary" Canvas.Left="611" Canvas.Top="53" Foreground="#FFFF6F00" FontSize="10" />
+                <Label x:Name="Order_Price_lbl" Content="0 USD" Canvas.Left="696" Canvas.Top="53" Foreground="#FFFF6F00" FontSize="10" VerticalAlignment="Center" FontWeight="Bold" Width="86" Height="27" />
             </Canvas>
             <Canvas x:Name="Discount_Panel" HorizontalAlignment="Left" Height="411" VerticalAlignment="Top" Width="782" Canvas.Left="10" Canvas.Top="10" d:IsHidden="True">
-                <Image x:Name="Back_Discount_img" Height="49" Width="49" Source="undo-1.png" Tag="Home" MouseLeftButtonUp="Change_Panel" MouseEnter="MouseEnter_Hover" MouseLeave="MouseLeave_Hover"/>
+                <Image x:Name="Back_Discount_img" Height="49" Width="49" Source="undo-1.png" Tag="Home" MouseLeftButtonUp="Change_Panel" MouseEnter="MouseEnter_Hover" MouseLeave="MouseLeave_Hover" />
                 <ListBox x:Name="Discount_listbox" Height="347" Canvas.Left="122" Width="511" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#FFF96D01" MouseEnter="MouseEnter_Hover" MouseLeave="MouseLeave_Hover" ScrollViewer.VerticalScrollBarVisibility="Hidden" ScrollViewer.HorizontalScrollBarVisibility="Disabled" Canvas.Top="54" SelectionChanged="Discount_listbox_SelectionChanged">
                     <ListBox.ItemTemplate>
                         <DataTemplate>
                             <Grid>
                                 <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="70"/>
-                                    <ColumnDefinition Width="210"/>
-                                    <ColumnDefinition Width="140"/>
+                                    <ColumnDefinition Width="70" />
+                                    <ColumnDefinition Width="210" />
+                                    <ColumnDefinition Width="140" />
                                 </Grid.ColumnDefinitions>
-                                <TextBlock Grid.Column="0" Grid.Row="1" Text="{Binding Type}" VerticalAlignment="Center" Margin="5"/>
-                                <TextBlock Grid.Column="1" Grid.Row="1" Text="{Binding _Items}" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="5"/>
-                                <TextBlock Grid.Column="2" Grid.Row="1" Text="{Binding _Target}" VerticalAlignment="Center" Margin="5"/>
+                                <TextBlock Grid.Column="0" Grid.Row="1" Text="{Binding Type}" VerticalAlignment="Center" Margin="5" />
+                                <TextBlock Grid.Column="1" Grid.Row="1" Text="{Binding _Items}" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="5" />
+                                <TextBlock Grid.Column="2" Grid.Row="1" Text="{Binding _Target}" VerticalAlignment="Center" Margin="5" />
                             </Grid>
                         </DataTemplate>
                     </ListBox.ItemTemplate>
                 </ListBox>
-                <Label Content="Type" Canvas.Left="128" Canvas.Top="18" Foreground="#FFFF6F00" FontSize="16" FontWeight="Bold"/>
-                <Label Content="Items required" Canvas.Left="245" Canvas.Top="18" Foreground="#FFFF6F00" FontSize="16" FontWeight="Bold"/>
-                <Label Content="Discount" Canvas.Left="409" Canvas.Top="18" Foreground="#FFFF6F00" FontSize="16" FontWeight="Bold"/>
+                <Label Content="Type" Canvas.Left="128" Canvas.Top="18" Foreground="#FFFF6F00" FontSize="16" FontWeight="Bold" />
+                <Label Content="Items required" Canvas.Left="245" Canvas.Top="18" Foreground="#FFFF6F00" FontSize="16" FontWeight="Bold" />
+                <Label Content="Discount" Canvas.Left="409" Canvas.Top="18" Foreground="#FFFF6F00" FontSize="16" FontWeight="Bold" />
             </Canvas>
         </Canvas>
-
     </Grid>
 </Window>

@@ -6,13 +6,10 @@ using System.Threading.Tasks;
 
 namespace Pizza_House.Model
 {
+    #region Class
     class Cart_Item
     {
-        //public string _Price { get { return Price + " USD"; } set { } }
-        public Menu_Items Menu_Item { get; set; }
-        public List<Ingredient> RemovedIngredients { get; set; } = new List<Ingredient>();
-        public List<Ingredient> _Ingredients { get { return this.Menu_Item.Ingredients.Select(x => x.Ingredient).Except(RemovedIngredients).ToList(); } set { } }
-        public Size Size { get; set; }
+        #region Properties
         public string Name { get { return Menu_Item.Name; } set { } }
         public int Amount { get; set; } = 1;
         public float _Price
@@ -25,6 +22,15 @@ namespace Pizza_House.Model
             }
             set { }
         }
-
+        #endregion
+        #region Class Properties
+        public Menu_Items Menu_Item { get; set; }
+        public Size Size { get; set; }
+        #endregion
+        #region List Properties
+        public List<Ingredient> RemovedIngredients { get; set; } = new List<Ingredient>();
+        public List<Ingredient> _Ingredients { get { return this.Menu_Item.Ingredients.Select(x => x.Ingredient).Except(RemovedIngredients).ToList(); } set { } }
+        #endregion
     }
+    #endregion
 }
